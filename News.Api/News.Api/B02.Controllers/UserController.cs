@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using News.Api.A01.Foundation.DataHelpers;
@@ -18,6 +19,7 @@ using System.Text;
 
 namespace News.Api.B02.Controllers
 {
+    
     [ApiController]
     [Route("Api/[controller]/[action]")]
     public class UserController:BaseController<AppUser, AppUserDTO>
@@ -41,6 +43,7 @@ namespace News.Api.B02.Controllers
         /// <param name="userDTO"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<SecurityToken> Login(AppUserDTO userDTO)
         {
             var resultData = new Result();
@@ -82,6 +85,7 @@ namespace News.Api.B02.Controllers
         /// <param name="appUserDTO"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<Result> Logon(AppUserDTO appUserDTO)
         {
             appUserDTO.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
@@ -94,6 +98,7 @@ namespace News.Api.B02.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Authorize(Roles = "管理员")]
         public async Task<Result> Delete(string  id)
         {
             var result = new Result();
@@ -115,6 +120,7 @@ namespace News.Api.B02.Controllers
         /// <param name="appUserDTO"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<Result> PassEdit(AppUserDTO appUserDTO)
         {
             var resultData = new Result();

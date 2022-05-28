@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -44,7 +45,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:KEY"]))
     };
 });
-
+//所有控制器启动身份验证
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(new AuthorizeFilter());
+});
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 var app = builder.Build();
@@ -58,8 +63,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 
 app.MapControllers();
