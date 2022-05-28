@@ -35,7 +35,7 @@ namespace News.Api.A03._02.Dto.Services
         public async Task<ResultData<TApiEntity>> GetAllAsync()
         {
             var ddos = await _repository.GetAllAsync();
-            var dtos = await _mapper.MapToApiEntitysAsync(ddos.Datas);
+            var dtos =  _mapper.Mapper.Map<List<TApiEntity>>(ddos.Datas);
             return new ResultData<TApiEntity>()
             {
                 Datas = dtos,
@@ -46,7 +46,7 @@ namespace News.Api.A03._02.Dto.Services
         public async Task<ResultData<TApiEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
             var ddos = await _repository.GetAllAsync(predicate);
-            var dtos = await _mapper.MapToApiEntitysAsync(ddos.Datas);
+            var dtos =  _mapper.Mapper.Map<List<TApiEntity>>(ddos.Datas);
             return new ResultData<TApiEntity>()
             {
                 Datas = dtos,
@@ -54,14 +54,14 @@ namespace News.Api.A03._02.Dto.Services
             };
         }
 
-        public async Task<TApiEntity> GetAsync(Guid id)=> await _mapper.MapToApiEntityAsync(await _repository.GetAsync(id));
+        public async Task<TApiEntity> GetAsync(Guid id)=>  _mapper.Mapper.Map<TApiEntity>(await _repository.GetAsync(id));
 
-        public async Task<TApiEntity> GetAsync(Expression<Func<TEntity, bool>> predicate) => await _mapper.MapToApiEntityAsync(await _repository.GetAsync(predicate));
+        public async Task<TApiEntity> GetAsync(Expression<Func<TEntity, bool>> predicate) =>  _mapper.Mapper.Map<TApiEntity>(await _repository.GetAsync(predicate));
 
         public async Task<ResultData<TApiEntity>> GetBySelectAsync(int start, int length, Expression<Func<TEntity, bool>> predicate)
         {
             var ddos = await _repository.GetBySelectAsync(start, length, predicate);
-            var dtos = await _mapper.MapToApiEntitysAsync(ddos.Datas);
+            var dtos =  _mapper.Mapper.Map<List<TApiEntity>>(ddos.Datas);
             return new ResultData<TApiEntity>()
             {
                 Datas = dtos,

@@ -33,7 +33,7 @@
 			return {
 				logo: "/static/images/logo.png",
 				user: {
-					phone: "17396725525",
+					phone: "admin",
 					password: "123456"
 				},
 				rules: {
@@ -55,20 +55,39 @@
 		methods: {
 			submit() {
 				this.$refs.uForm.validate().then(res => {
-					let user = this.user
-					this.$refs.uToast.show({
-						type: 'success',
-						message: "登录成功",
-						complete() {
-							uni.switchTab({
-								url: '../person/person'
+					let user = {
+						phoneNumber:this.user.phone,
+						passwordHash:this.user.password
+					}
+					api.login(user,res=>{
+						console.log(res);
+						if(res.data.issuer != "登录失败"){
+							let info = res.data.payload
+							this.$store.state.user.id = info.id
+							this.$store.state.user.userName = info.name
+							this.$store.state.role = info.role
+							this.$store.state.token = res.data.rawPayload
+							this.$refs.uToast.show({
+								type: 'success',
+								message: "登录成功",
+								complete() {
+									uni.switchTab({
+										url: '../person/person'
+									})
+								}
+							})
+						}else{
+							this.$refs.uToast.show({
+								type: 'error',
+								message: "登录失败"
 							})
 						}
-					})
-
-					
+					})				
 				}).catch(errors => {
-					this.$refs.uToast.show('你猜猜为什么错了')
+					this.$refs.uToast.show({
+								type: 'error',
+								message: "你猜猜为什么错了"
+							})
 				})
 
 			}

@@ -45,7 +45,7 @@ namespace News.Api.B02.Controllers
         {
             var resultData = new Result();
             var pass = BaseFunction.MD5Encrypt32(userDTO.PasswordHash);
-            var loginUser = await _apiService.GetAsync(userDTO.Id);
+            var loginUser = await _apiService.GetAsync(x=>x.PhoneNumber == userDTO.PhoneNumber && x.PasswordHash == pass);
             if (loginUser != null)
             {
                 resultData.Message = "登录成功";

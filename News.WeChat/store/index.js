@@ -6,16 +6,18 @@ const store = new Vuex.Store({
 	screenHeight:"",
 	state: {
 		tabbarIndex:0,
-		accountToken:"",
+		token:"",
 		user:{
+			id:"",
+			userName:""
 		},
-		role:-1
+		role:""
 	},
 })
 //获取屏幕高度
  uni.getSystemInfo({
 		success: (res) => {
-			store.screenHeight =   res.screenHeight+"px"
+			store.screenHeight = res.screenHeight+"px"
 		}
 	})
 

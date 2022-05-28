@@ -29,12 +29,6 @@
 			}
 		},
 		onLoad() {
-			let that = this
-			api.GetBanner(x=>{
-				x.data.banners.forEach(item=>{
-					that.bannerList.push(item.imageUrl)
-				})
-			})
 			
 		},
 		methods: {

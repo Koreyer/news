@@ -12,8 +12,6 @@ namespace News.Api.A03._02.Dto.Services.Helpers
         public IRepository<TEntity> EntityRepository { get; }
         public IMapper Mapper { get; }
         Task<TEntity> MapToEntityAsync(TApiEntity apiBo, params Expression<Func<TEntity, object>>[] expressions);
-        Task<List<TApiEntity>> MapToApiEntitysAsync(List<TEntity> ddos);
-        Task<TApiEntity> MapToApiEntityAsync(TEntity ddo);
 
     }
 }
