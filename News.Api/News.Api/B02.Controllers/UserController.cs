@@ -45,7 +45,7 @@ namespace News.Api.B02.Controllers
         {
             var resultData = new Result();
             var pass = BaseFunction.MD5Encrypt32(userDTO.PasswordHash);
-            var loginUser = await _apiService.GetAsync(x=>x.PhoneNumber == userDTO.PhoneNumber && x.PasswordHash == pass);
+            var loginUser = await _apiService.GetAsync(x=>x.PhoneNumber == userDTO.PhoneNumber && x.PasswordHash == pass && x.IsDeleted == false);
             if (loginUser != null)
             {
                 resultData.Message = "登录成功";
@@ -87,6 +87,44 @@ namespace News.Api.B02.Controllers
             appUserDTO.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
             appUserDTO.CreateTime = DateTime.Now;
             return await _repository.AddAsync(_mapper.Map<AppUser>(appUserDTO));
+        }
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<Result> Delete(string  id)
+        {
+            var result = new Result();
+            var guid = Guid.Empty;
+            if(Guid.TryParse(id,out guid))
+            {
+                var user = await _apiService.GetAsync(guid);
+                user.IsDeleted = true;
+                result =  await _apiService.UpdateAsync(user);
+                result.Message = "删除成功";
+                return result;
+            }
+            result.Message = "删除失败";
+            return result;
+        }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="appUserDTO"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<Result> PassEdit(AppUserDTO appUserDTO)
+        {
+            var resultData = new Result();
+            var loginUser = await _apiService.GetAsync(appUserDTO.Id);
+            loginUser.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
+            if (loginUser != null)
+            {
+                return await _apiService.UpdateAsync(loginUser);
+            }
+            return resultData;
         }
         
     }

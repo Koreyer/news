@@ -210,6 +210,11 @@ namespace News.Api.A02._03.News.Repositories
             {
                 try
                 {
+                    if (_context.ChangeTracker.Entries<TEntity>().Any(x => x.Entity.Id.Equals(ddo.Id)))
+                    {
+                        var trackingBo = _context.ChangeTracker.Entries<TEntity>().AsQueryable().Where(x => x.Entity.Id.Equals(ddo.Id)).FirstOrDefault();
+                        trackingBo.State = EntityState.Detached;
+                    }
                     _context.Set<TEntity>().Update(ddo);
                     await _context.SaveChangesAsync();
                     result.Message = "更新成功";
