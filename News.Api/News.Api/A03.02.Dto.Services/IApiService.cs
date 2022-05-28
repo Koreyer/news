@@ -15,13 +15,62 @@ namespace News.Api.A03._02.Dto.Services
         NewsContext Context { get; }
         IRepository<TEntity> Repository { get; }
         IMapperHelp<TEntity, TApiEntity> Mapper { get; }
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
         Task<Result> AddAsync(TApiEntity request, params Expression<Func<TEntity, object>>[] expressions);
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
         Task<Result> UpdateAsync(TApiEntity request, params Expression<Func<TEntity, object>>[] expressions);
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task<Result> DeleteByIdAsync(Guid id);
+        /// <summary>
+        /// 根据id获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task<TApiEntity> GetAsync(Guid id);
+        /// <summary>
+        /// 根据条件获取一条数据
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         Task<TApiEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        /// <summary>
+        /// 获取一组数据
+        /// </summary>
+        /// <returns></returns>
         Task<ResultData<TApiEntity>> GetAllAsync();
+        /// <summary>
+        /// 根据条件获取一组数据
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         Task<ResultData<TApiEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
+        /// <summary>
+        /// 根据查询条件获取一组数据
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         Task<ResultData<TApiEntity>> GetBySelectAsync(int start, int length, Expression<Func<TEntity, bool>> predicate);
+        /// <summary>
+        /// 根据id查找是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool> HasAsync(Guid id);
     }
 }

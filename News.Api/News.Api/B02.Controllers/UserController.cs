@@ -88,9 +88,18 @@ namespace News.Api.B02.Controllers
         [AllowAnonymous]
         public async Task<Result> Logon(AppUserDTO appUserDTO)
         {
-            appUserDTO.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
-            appUserDTO.CreateTime = DateTime.Now;
-            return await _repository.AddAsync(_mapper.Map<AppUser>(appUserDTO));
+            var user = await _apiService.GetAsync(x => x.PhoneNumber == appUserDTO.PhoneNumber);
+            if(user == null)
+            {
+                appUserDTO.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
+                appUserDTO.CreateTime = DateTime.Now;
+                return await _repository.AddAsync(_mapper.Map<AppUser>(appUserDTO));
+            }
+            else
+            {
+                return new Result() { };
+            }
+            
         }
         /// <summary>
         /// 删除用户

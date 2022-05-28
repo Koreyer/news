@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using News.Api.A01.Foundation.Data;
 using News.Api.A01.Foundation.DataHelpers;
 using News.Api.A01.Foundation.Tools;
@@ -26,6 +27,7 @@ namespace News.Api.B01.BaseController
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public virtual async Task<ResultData<TApiEntity>> GetAsync()=>await _apiService.GetAllAsync();
         
         /// <summary>
@@ -42,6 +44,7 @@ namespace News.Api.B01.BaseController
         /// <param name="selectParameter"></param>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public virtual async Task<ResultData<TApiEntity>> GetBySelectAsync([FromBody] SelectParameter selectParameter)
         {
             if(!string.IsNullOrEmpty(selectParameter.SelectValue))

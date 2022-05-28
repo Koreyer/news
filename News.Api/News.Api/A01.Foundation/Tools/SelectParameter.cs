@@ -5,5 +5,6 @@
         public int Start { get; set; }
         public int Length { get; set; }
         public string? SelectValue { get; set; }
+        public string? ChanelId { get; set; }
     }
 }

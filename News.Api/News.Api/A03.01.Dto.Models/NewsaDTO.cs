@@ -8,8 +8,8 @@ namespace News.Api.A03._01.Dto.Models
         public DateTime Time { get; set; }
         public string? FilesId { get; set; }
         public string? Content { get; set; }
-        public string? UserId { get; set; }
-        public string? UserName { get; set; }
+        public string? AppUserId { get; set; }
+        public string? AppUserName { get; set; }
         public string? ChanelId { get; set; }
         public string? ChanelName { get; set; }
     }

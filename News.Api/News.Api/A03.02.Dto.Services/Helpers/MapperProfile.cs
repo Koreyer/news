@@ -16,6 +16,13 @@ namespace News.Api.A03._02.Dto.Services.Helpers
             //创建Map,左边是实体模型类，右边是DTO
             CreateMap<AppUser, AppUserDTO>().ForMember(x => x.SexName, y => y.MapFrom(a => a.Sex)).ForMember(x => x.RoleTypeName, y => y.MapFrom(a => a.RoleType));
             CreateMap<AppUserDTO, AppUser>().ForMember(x => x.Sex, y => y.MapFrom(a => a.SexName)).ForMember(x => x.RoleType, y => y.MapFrom(a => a.RoleTypeName));
+
+            CreateMap<Newsa, NewsaDTO>();
+            CreateMap<NewsaDTO, Newsa>();
+
+            CreateMap<Chanel, ChanelDTO>();
+            CreateMap<ChanelDTO, Chanel>();
+
         }
 
     }

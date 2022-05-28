@@ -13,7 +13,7 @@ namespace News.Api.A02._01.News.Models
         //内容
         public string? Content { get; set; }
         //发布人
-        public AppUser? User { get; set; }
+        public AppUser? AppUser { get; set; }
         //频道
         public Chanel? Chanel { get; set; }
 

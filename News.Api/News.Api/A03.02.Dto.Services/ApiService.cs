@@ -76,5 +76,9 @@ namespace News.Api.A03._02.Dto.Services
             return await _repository.UpdateAsync(bo);
         }
 
+        public async Task<bool> HasAsync(Guid id)
+        {
+            return await _repository.HasAsync(id);
+        }
     }
 }
