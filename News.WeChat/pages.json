@@ -1,0 +1,87 @@
+{
+	"easycom": {
+			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home"
+			// "style": {
+			// 	"navigationBarTitleText": "uni-app"
+			// }
+		},
+		{
+			"path": "pages/chanel/chanel"
+			// "style": {
+			// 	"navigationBarTitleText": "uni-app"
+			// }
+		},
+		{
+			"path": "pages/person/person"
+			// "style": {
+			// 	"navigationBarTitleText": "uni-app"
+			// }
+		},
+		{
+			"path": "pages/news/news"
+			// "style": {
+			// 	"navigationBarTitleText": "uni-app"
+			// }
+		}
+	    ,{
+            "path" : "pages/login/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+		"globalStyle": {
+			"navigationBarTextStyle": "white",
+			"navigationBarTitleText": "uni-app",
+			"navigationBarBackgroundColor": "#007AFF",
+			"backgroundColor": "#FFFFFF",
+			"navigationStyle":"custom",
+			"app-plus":{
+				"titleView":false
+			}
+		},
+		"tabBar": {
+				"color": "#7A7E83",
+				"selectedColor": "#3cc51f",
+				"borderStyle": "white",
+				"backgroundColor": "#f4f5f7",
+				"custom": true,
+				"list": [{
+					"pagePath": "pages/home/home",
+						"text": "首页",
+						"count": 2,
+						"isDot": true,
+						"customIcon": false
+					},
+					{
+						"pagePath": "pages/chanel/chanel",
+						"text": "频道",
+						"customIcon": false
+					},{
+						"pagePath": "pages/comment/comment",
+						"text": "评论",
+						"customIcon": false
+					},
+					{
+						"pagePath": "pages/news/news",
+						"text": "新闻",
+						// "midButton": true,
+						"customIcon": false
+					},
+					{
+						"pagePath": "pages/person/person",
+						"text": "我的",
+						"customIcon": false
+					}
+				],
+				"current": 0
+			}
+
+}
