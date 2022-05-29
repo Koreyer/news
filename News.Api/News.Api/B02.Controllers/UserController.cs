@@ -24,16 +24,14 @@ namespace News.Api.B02.Controllers
     [Route("Api/[controller]/[action]")]
     public class UserController:BaseController<AppUser, AppUserDTO>
     {
-        private readonly IApiService<AppUser, AppUserDTO> _apiService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly IRepository<AppUser> _repository;
         public UserController(IApiService<AppUser, AppUserDTO> apiService, IConfiguration configuration) : base(apiService) 
         { 
-            _apiService = apiService;
             _configuration = configuration;
-            _mapper = _apiService.Mapper.Mapper;
-            _repository = _apiService.Repository;
+            _mapper = ApiService.Mapper.Mapper;
+            _repository = ApiService.Repository;
         }
 
 
@@ -48,7 +46,7 @@ namespace News.Api.B02.Controllers
         {
             var resultData = new Result();
             var pass = BaseFunction.MD5Encrypt32(userDTO.PasswordHash);
-            var loginUser = await _apiService.GetAsync(x=>x.PhoneNumber == userDTO.PhoneNumber && x.PasswordHash == pass && x.IsDeleted == false);
+            var loginUser = await ApiService.GetAsync(x=>x.PhoneNumber == userDTO.PhoneNumber && x.PasswordHash == pass && x.IsDeleted == false);
             if (loginUser != null)
             {
                 resultData.Message = "登录成功";
@@ -88,7 +86,7 @@ namespace News.Api.B02.Controllers
         [AllowAnonymous]
         public async Task<Result> Logon(AppUserDTO appUserDTO)
         {
-            var user = await _apiService.GetAsync(x => x.PhoneNumber == appUserDTO.PhoneNumber);
+            var user = await ApiService.GetAsync(x => x.PhoneNumber == appUserDTO.PhoneNumber);
             if(user == null)
             {
                 appUserDTO.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
@@ -114,9 +112,9 @@ namespace News.Api.B02.Controllers
             var guid = Guid.Empty;
             if(Guid.TryParse(id,out guid))
             {
-                var user = await _apiService.GetAsync(guid);
+                var user = await ApiService.GetAsync(guid);
                 user.IsDeleted = true;
-                result =  await _apiService.UpdateAsync(user);
+                result =  await ApiService.UpdateAsync(user);
                 result.Message = "删除成功";
                 return result;
             }
@@ -133,11 +131,11 @@ namespace News.Api.B02.Controllers
         public async Task<Result> PassEdit(AppUserDTO appUserDTO)
         {
             var resultData = new Result();
-            var loginUser = await _apiService.GetAsync(appUserDTO.Id);
+            var loginUser = await ApiService.GetAsync(appUserDTO.Id);
             loginUser.PasswordHash = BaseFunction.MD5Encrypt32(appUserDTO.PasswordHash);
             if (loginUser != null)
             {
-                return await _apiService.UpdateAsync(loginUser);
+                return await ApiService.UpdateAsync(loginUser);
             }
             return resultData;
         }

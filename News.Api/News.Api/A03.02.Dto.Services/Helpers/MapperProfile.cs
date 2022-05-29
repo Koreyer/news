@@ -23,6 +23,9 @@ namespace News.Api.A03._02.Dto.Services.Helpers
             CreateMap<Chanel, ChanelDTO>();
             CreateMap<ChanelDTO, Chanel>();
 
+            CreateMap<Files, FilesDTO>();
+            CreateMap<FilesDTO, Files>();
+
         }
 
     }

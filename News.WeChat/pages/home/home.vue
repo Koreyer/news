@@ -1,7 +1,13 @@
 <template>
 	<view class="page" :style="{'height':this.$store.screenHeight}">
 		<view class="body">
-			
+			<u-upload
+					:fileList="file"
+					@afterRead="afterRead"
+					name="1"
+					multiple
+					:maxCount="1"
+				></u-upload>
 		</view>
 		
 		
@@ -26,12 +32,25 @@
 		data() {
 			return {
 				title: "",
+				file:[]
 			}
 		},
 		onLoad() {
 			
 		},
 		methods: {
+			afterRead(file, lists, name){
+				console.log(this.$store.state);
+				console.log(file);
+				uni.uploadFile({
+							url: 'https://localhost:3000/api/Files/fileupload', //仅为示例，非真实的接口地址
+							filePath: file.file[0].thumb,
+							name: 'file',
+							success: (uploadFileRes) => {
+								console.log(uploadFileRes.data);
+							}
+						});
+			}
 		}
 	}
 </script>

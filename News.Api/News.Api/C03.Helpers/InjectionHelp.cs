@@ -23,11 +23,15 @@ namespace News.Api.C03.Helpers
             services.AddScoped<IApiService<AppUser, AppUserDTO>, ApiService<AppUser, AppUserDTO>>();
             services.AddScoped<IMapperHelp<AppUser, AppUserDTO>, MapperHelp<AppUser, AppUserDTO>>();
             #endregion
-            #region 用户
+            #region 新闻
             services.AddScoped<IRepository<Newsa>, Repository<Newsa>>();
             services.AddScoped<IApiService<Newsa, NewsaDTO>, ApiService<Newsa, NewsaDTO>>();
             services.AddScoped<IMapperHelp<Newsa, NewsaDTO>, MapperHelp<Newsa, NewsaDTO>>();
             #endregion
+
+            services.AddScoped<IRepository<Files>, Repository<Files>>();
+            services.AddScoped<IApiService<Files, FilesDTO>, ApiService<Files, FilesDTO>>();
+            services.AddScoped<IMapperHelp<Files, FilesDTO>, MapperHelp<Files, FilesDTO>>();
         }
     }
 }

@@ -14,31 +14,34 @@ namespace News.Api.B02.Controllers
     [Route("Api/[controller]/[action]")]
     public class NewsController:BaseController<Newsa,NewsaDTO>
     {
-        private readonly IApiService<Newsa, NewsaDTO> _apiService;
-        public NewsController(IApiService<Newsa, NewsaDTO> apiService) : base(apiService) { _apiService = apiService; }
+        public NewsController(IApiService<Newsa, NewsaDTO> apiService) : base(apiService) { }
 
         //[Authorize(Roles = "发布社")]
         public override Task<Result> AddAsync(NewsaDTO apiEntity)
         {
-            return _apiService.AddAsync(apiEntity,x=>x.AppUser, x => x.Chanel, x => x.Files);
+            return ApiService.AddAsync(apiEntity,x=>x.AppUser, x => x.Chanel, x => x.Files);
         }
-
+        /// <summary>
+        /// 用户获取新闻
+        /// </summary>
+        /// <param name="selectParameter"></param>
+        /// <returns></returns>
         public override async Task<ResultData<NewsaDTO>> GetBySelectAsync([FromBody] SelectParameter selectParameter)
         {
             if (!string.IsNullOrEmpty(selectParameter.SelectValue) && !string.IsNullOrEmpty(selectParameter.ChanelId))
             {
-                return await _apiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length, x => x.Name.Contains(selectParameter.SelectValue) && x.Chanel.Id == Guid.Parse(selectParameter.ChanelId));
+                return await ApiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length, x => x.Name.Contains(selectParameter.SelectValue) && x.Chanel.Id == Guid.Parse(selectParameter.ChanelId));
             }else if (!string.IsNullOrEmpty(selectParameter.SelectValue))
             {
-                return await _apiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length, x => x.Name.Contains(selectParameter.SelectValue));
+                return await ApiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length, x => x.Name.Contains(selectParameter.SelectValue));
             }
             else if (!string.IsNullOrEmpty(selectParameter.ChanelId))
             {
-                return await _apiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length, x => x.Chanel.Id == Guid.Parse(selectParameter.ChanelId));
+                return await ApiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length, x => x.Chanel.Id == Guid.Parse(selectParameter.ChanelId));
             }
             else
             {
-                return await _apiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length,null);
+                return await ApiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length,null);
             }
         }
 
