@@ -7,6 +7,9 @@
 		<view class="logo">
 			<u-image :src="logo" width="300rpx" height="300rpx"></u-image>
 		</view>
+		管理员：admin
+		用户：123456
+		发布社：654321
 		<view class="input">
 			<u--form labelPosition="left" :model="user" :rules="rules" ref="uForm">
 				<u-form-item label="账号:" labelWidth="44" prop="phone">
