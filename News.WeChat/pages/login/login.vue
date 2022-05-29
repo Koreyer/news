@@ -66,7 +66,7 @@
 							this.$store.state.user.id = info.id
 							this.$store.state.user.userName = info.name
 							this.$store.state.role = info.role
-							this.$store.state.token = res.data.rawPayload
+							this.$store.state.token = res.data.rawData
 							this.$refs.uToast.show({
 								type: 'success',
 								message: "登录成功",
