@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using News.Api.A01.Foundation.DataHelpers;
+using News.Api.A01.Foundation.Tools;
 using News.Api.A02._01.News.Models;
 using News.Api.A03._01.Dto.Models;
 using News.Api.A03._02.Dto.Services;
@@ -99,7 +100,7 @@ namespace News.Api.B02.Controllers
         public async Task<string> GetPathById(Guid id)
         {
             var file = await ApiService.GetAsync(id);
-            return file == null ? null : file.Path;
+            return file == null ? null :BaseUrl.ApiBaseRouteProduct+ file.Path;
         }
 
     }
