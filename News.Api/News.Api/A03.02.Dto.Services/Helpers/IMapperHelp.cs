@@ -12,6 +12,9 @@ namespace News.Api.A03._02.Dto.Services.Helpers
         public IRepository<TEntity> EntityRepository { get; }
         public IMapper Mapper { get; }
         Task<TEntity> MapToEntityAsync(TApiEntity apiBo, params Expression<Func<TEntity, object>>[] expressions);
+        Task<TOther> MapToOtherEntityAsync<TOther, TApiOther>(TApiOther bo, params Expression<Func<TOther, object>>[] expressions)
+            where TOther : class, IData, new()
+            where TApiOther : class, IData, new();
 
     }
 }

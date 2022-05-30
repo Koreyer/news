@@ -10,6 +10,7 @@ using News.Api.B01.BaseController;
 
 namespace News.Api.B02.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("Api/[controller]/[action]")]
     public class NewsController:BaseController<Newsa,NewsaDTO>
@@ -44,6 +45,20 @@ namespace News.Api.B02.Controllers
                 return await ApiService.GetBySelectAsync(selectParameter.Start, selectParameter.Length,null);
             }
         }
+        /// <summary>
+        /// 新闻访问
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<Result> AccessAsync(Guid id)
+        {
+            var news = await ApiService.GetAsync(id);
+            news.AccessCount+=1;
+            return await ApiService.UpdateAsync(news);
+        }
+        
+
 
     }
 }

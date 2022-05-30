@@ -8,7 +8,7 @@ using News.Api.A03._02.Dto.Services;
 
 namespace News.Api.B01.BaseController
 {
-    
+    [AllowAnonymous]
     public class BaseController<TEntity,TApiEntity> : ControllerBase
         where TEntity : class,IData,new()
         where TApiEntity : class,IData, new()

@@ -22,6 +22,7 @@ namespace News.Api.A03._02.Dto.Services
         /// <param name="expressions"></param>
         /// <returns></returns>
         Task<Result> AddAsync(TApiEntity request, params Expression<Func<TEntity, object>>[] expressions);
+        Task<Result> AddTOherAsync<TOher, TApiOher>(TApiOher request, params Expression<Func<TOher, object>>[] expressions) where TOher : class, IData, new() where TApiOher : class, IData, new();
         /// <summary>
         /// 更新
         /// </summary>
@@ -29,6 +30,7 @@ namespace News.Api.A03._02.Dto.Services
         /// <param name="expressions"></param>
         /// <returns></returns>
         Task<Result> UpdateAsync(TApiEntity request, params Expression<Func<TEntity, object>>[] expressions);
+        Task<Result> UpdateTOherAsync<TOher,TApiOher>(TApiOher request, params Expression<Func<TOher, object>>[] expressions) where TOher:class,IData,new() where TApiOher : class, IData, new();
         /// <summary>
         /// 删除
         /// </summary>
@@ -47,6 +49,7 @@ namespace News.Api.A03._02.Dto.Services
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<TApiEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TApiOther> GetOtherAsync<Other,TApiOther>(Guid id) where Other : class, IData, new() where TApiOther:class,IData,new() ;
         /// <summary>
         /// 获取一组数据
         /// </summary>

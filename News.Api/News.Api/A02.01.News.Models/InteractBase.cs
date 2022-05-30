@@ -7,6 +7,6 @@ namespace News.Api.A02._01.News.Models
     public class InteractBase : Data
     {
         public AppUser? User { get; set; }
-        public Newsa? News { get; set; }
+        public Newsa? Newsa { get; set; }
     }
 }

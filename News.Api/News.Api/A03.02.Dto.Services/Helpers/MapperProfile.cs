@@ -26,6 +26,9 @@ namespace News.Api.A03._02.Dto.Services.Helpers
             CreateMap<Files, FilesDTO>();
             CreateMap<FilesDTO, Files>();
 
+            CreateMap<Newsa, NewsaDTO>();
+            CreateMap<NewsaDTO, Newsa>();
+
         }
 
     }

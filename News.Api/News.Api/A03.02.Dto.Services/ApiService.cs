@@ -29,6 +29,12 @@ namespace News.Api.A03._02.Dto.Services
             var bo = await _mapper.MapToEntityAsync(request, expressions);
             return await _repository.AddAsync(bo);
         }
+        public async Task<Result> AddTOherAsync<TOher, TApiOher>(TApiOher request, params Expression<Func<TOher, object>>[] expressions) where TOher : class, IData, new() where TApiOher : class, IData, new()
+        {
+            var bo = await _mapper.MapToOtherEntityAsync(request, expressions);
+            bo.Id = request.Id;
+            return await _repository.AddTOherAsync(bo);
+        }
 
         public async Task<Result> DeleteByIdAsync(Guid id)=> await _repository.DeleteAsync(id);
 
@@ -55,6 +61,7 @@ namespace News.Api.A03._02.Dto.Services
         }
 
         public async Task<TApiEntity> GetAsync(Guid id)=>  _mapper.Mapper.Map<TApiEntity>(await _repository.GetAsync(id));
+        public async Task<TApiOther> GetOtherAsync<Other, TApiOther>(Guid id) where Other : class, IData, new() where TApiOther : class, IData, new() => _mapper.Mapper.Map<TApiOther>(await _repository.GetOtherAsync<Other>(id));
 
         public async Task<TApiEntity> GetAsync(Expression<Func<TEntity, bool>> predicate) =>  _mapper.Mapper.Map<TApiEntity>(await _repository.GetAsync(predicate));
 
@@ -74,6 +81,12 @@ namespace News.Api.A03._02.Dto.Services
             var bo = await _mapper.MapToEntityAsync(request,expressions);
             bo.Id = request.Id;
             return await _repository.UpdateAsync(bo);
+        }
+        public async Task<Result> UpdateTOherAsync<TOher, TApiOher>(TApiOher request, params Expression<Func<TOher, object>>[] expressions) where TOher : class,IData,new() where TApiOher : class,IData,new()
+        {
+            var bo = await _mapper.MapToOtherEntityAsync(request, expressions);
+            bo.Id = request.Id;
+            return await _repository.UpdateTOherAsync(bo);
         }
 
         public async Task<bool> HasAsync(Guid id)

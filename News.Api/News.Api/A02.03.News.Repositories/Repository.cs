@@ -49,6 +49,32 @@ namespace News.Api.A02._03.News.Repositories
             }
         }
 
+        public async Task<Result> AddTOherAsync<TOher>(TOher oher)
+            where TOher : class, IData, new()
+        {
+            var result = new Result()
+            {
+                Message = "新增失败",
+                ResultEnum = ResultEnum.操作失败,
+                Status = 500
+
+            };
+            try
+            {
+                _context.Set<TOher>().Add(oher);
+                await _context.SaveChangesAsync();
+                result.Status = 200;
+                result.Message = "新增成功";
+                result.ResultEnum = ResultEnum.操作成功;
+                return result;
+            }
+            catch
+            {
+
+                return result;
+            }
+        }
+
         public async Task<int> CountAsync()  => await _context.Set<TEntity>()!.CountAsync();
 
         public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate) => await _context.Set<TEntity>()!.Where(predicate).CountAsync();
@@ -216,6 +242,42 @@ namespace News.Api.A02._03.News.Repositories
                         trackingBo.State = EntityState.Detached;
                     }
                     _context.Set<TEntity>().Update(ddo);
+                    await _context.SaveChangesAsync();
+                    result.Message = "更新成功";
+                    result.ResultEnum = ResultEnum.操作成功;
+                    result.Status = 200;
+                    return result;
+                }
+                catch
+                {
+                    result.Message = "更新失败";
+                    result.Status = 500;
+                    return result;
+                }
+            }
+        }
+        public async Task<Result> UpdateTOherAsync<TOher>(TOher oher)
+            where TOher : class,IData,new()
+        {
+            var result = new Result()
+            {
+                Message = "这条Id没有数据",
+                ResultEnum = ResultEnum.操作失败,
+                Status = 400
+
+            };
+            if (!await _context.Set<TOher>().AnyAsync(x => x.Id == oher.Id))
+                return result;
+            else
+            {
+                try
+                {
+                    if (_context.ChangeTracker.Entries<TOher>().Any(x => x.Entity.Id.Equals(oher.Id)))
+                    {
+                        var trackingBo = _context.ChangeTracker.Entries<TOher>().AsQueryable().Where(x => x.Entity.Id.Equals(oher.Id)).FirstOrDefault();
+                        trackingBo.State = EntityState.Detached;
+                    }
+                    _context.Set<TOher>().Update(oher);
                     await _context.SaveChangesAsync();
                     result.Message = "更新成功";
                     result.ResultEnum = ResultEnum.操作成功;

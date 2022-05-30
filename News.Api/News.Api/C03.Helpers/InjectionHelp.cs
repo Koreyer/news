@@ -32,6 +32,10 @@ namespace News.Api.C03.Helpers
             services.AddScoped<IRepository<Files>, Repository<Files>>();
             services.AddScoped<IApiService<Files, FilesDTO>, ApiService<Files, FilesDTO>>();
             services.AddScoped<IMapperHelp<Files, FilesDTO>, MapperHelp<Files, FilesDTO>>();
+
+            services.AddScoped<IRepository<Praise>, Repository<Praise>>();
+            services.AddScoped<IApiService<Praise, PraiseDTO>, ApiService<Praise, PraiseDTO>>();
+            services.AddScoped<IMapperHelp<Praise, PraiseDTO>, MapperHelp<Praise, PraiseDTO>>();
         }
     }
 }

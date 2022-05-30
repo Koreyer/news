@@ -12,5 +12,18 @@ namespace News.Api.A03._01.Dto.Models
         public string? AppUserName { get; set; }
         public string? ChanelId { get; set; }
         public string? ChanelName { get; set; }
+        /// <summary>
+        /// 点赞
+        /// </summary>
+        public int CommentCount { get; set; }
+        /// <summary>
+        /// 收藏
+        /// </summary>
+        public int CollectionCount { get; set; }
+        /// <summary>
+        /// 访问
+        /// </summary>
+        public int AccessCount { get; set; }
+
     }
 }

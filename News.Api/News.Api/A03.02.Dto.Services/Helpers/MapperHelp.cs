@@ -51,7 +51,49 @@ namespace News.Api.A03._02.Dto.Services.Helpers
             return result;
         }
 
+        public virtual async Task<TOther> MapToOtherEntityAsync<TOther, TApiOther>(TApiOther apiBo, params Expression<Func<TOther, object>>[] args) 
+            where TApiOther : class,IData,new() where TOther:class,IData,new()
+        {
+            if (apiBo == null) return default(TOther);
+            var MCE = new MapperConfigurationExpression();
+            var cfg = (MCE.CreateMap<TApiOther, TOther>());
+            if (args != null)
+            {
+                foreach (var arg in args)
+                {
+                    dynamic result;
+                    var propertyName = arg.Body.Type.Name + "Id";
+                    var boId = Guid.Parse(apiBo.GetType().GetProperty(propertyName).GetValue(apiBo).ToString());
+                    if (boId != Guid.Empty)
+                    {
+                        //获取EntityRepository的GetOtherBoAsync方法
+                        var getOtherBoAsync = EntityRepository.GetType().GetMethod("GetOtherAsync");
+                        //设置泛型类型
+                        var generic = getOtherBoAsync.MakeGenericMethod(new Type[] { arg.Body.Type });
+                        //调用方法并使用dynanic来接受Task<TOther>的返回
+                        dynamic task = generic.Invoke(EntityRepository, new object[] { boId });
+                        result = await task;
+                    }// 数据库没有该条数据，用意可能是同时添加该条数据，所以创建一个新的对象
+                    else
+                    {
+                        result = CreateObject(arg.Body.Type);
+                        result.Id = Guid.NewGuid();
+                    }
+                    if (result == null)
+                    {
+                        result = CreateObject(arg.Body.Type);
+                        result.Id = boId;
+                    }
 
+
+
+                    cfg.ForMember(arg, ops => ops.MapFrom(x => result));
+                }
+            }
+            var config = new MapperConfiguration(MCE);
+            var a = config.CreateMapper().Map<TOther>(apiBo);
+            return a;
+        }
 
         public virtual async Task<TEntity> MapToEntityAsync(TApiEntity apiBo, params Expression<Func<TEntity, object>>[] args)
         {

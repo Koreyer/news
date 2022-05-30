@@ -76,6 +76,7 @@ namespace News.Api.A02._03.News.Repositories
         /// <param name="TEntity"></param>
         /// <returns></returns>
         Task<Result> AddAsync(TEntity ddo);
+        Task<Result> AddTOherAsync<TOher>(TOher oher) where TOher : class, IData, new();
         #endregion
         #region 5. 更新库存对象的方法
         /// <summary>
@@ -84,6 +85,7 @@ namespace News.Api.A02._03.News.Repositories
         /// <param name="TDdo"></param>
         /// <returns></returns>
         Task<Result> UpdateAsync(TEntity ddo);
+        Task<Result> UpdateTOherAsync<TOher>(TOher oher) where TOher : class, IData, new();
         #endregion
 
         #region 6. 清除库存对象的方法
