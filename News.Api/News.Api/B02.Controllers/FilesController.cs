@@ -11,10 +11,15 @@ namespace News.Api.B02.Controllers
     [AllowAnonymous]
     [ApiController]
     [Route("Api/[controller]/[action]")]
-    public class FilesController:BaseController<Files,FilesDTO>
+    public class FilesController:Controller
     {
         private readonly IWebHostEnvironment _env;
-        public FilesController(IApiService<Files, FilesDTO> apiservice, IWebHostEnvironment env) : base(apiservice) { _env = env; }
+        private IApiService<Files,FilesDTO> ApiService { get; set; }
+        public FilesController(IApiService<Files, FilesDTO> apiservice, IWebHostEnvironment env)
+        { 
+            _env = env;
+            ApiService = apiservice;
+        }
 
         [HttpPost]
         public async Task<Result> FileUploadAsync(IFormFile file)
@@ -94,7 +99,7 @@ namespace News.Api.B02.Controllers
         public async Task<string> GetPathById(Guid id)
         {
             var file = await ApiService.GetAsync(id);
-            return file == null ? null : _env.WebRootPath+file.Path;
+            return file == null ? null : file.Path;
         }
 
     }
