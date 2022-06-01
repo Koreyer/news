@@ -54,6 +54,14 @@ namespace News.Api.B02.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<int> PraiseCount(Guid id) => await ApiService.CountAsync(x => x.AppUser.Id == id);
+        public async Task<int> PraiseCountByAppUserId(Guid id) => await ApiService.CountAsync(x => x.AppUser.Id == id);
+
+        /// <summary>
+        /// 获取用户点赞
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ResultData<PraiseDTO>> GetByAppUserIdAsync(Guid appUserId) =>await ApiService.GetAllAsync(x => x.AppUser.Id == appUserId);
     }
 }

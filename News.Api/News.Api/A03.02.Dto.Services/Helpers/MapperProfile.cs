@@ -29,6 +29,10 @@ namespace News.Api.A03._02.Dto.Services.Helpers
             CreateMap<Praise, PraiseDTO>();
             CreateMap<PraiseDTO, Praise>();
 
+            CreateMap<Collection, CollectionDTO>();
+            CreateMap<CollectionDTO, Collection>();
+            
+
         }
 
     }

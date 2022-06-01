@@ -36,6 +36,12 @@ namespace News.Api.C03.Helpers
             services.AddScoped<IRepository<Praise>, Repository<Praise>>();
             services.AddScoped<IApiService<Praise, PraiseDTO>, ApiService<Praise, PraiseDTO>>();
             services.AddScoped<IMapperHelp<Praise, PraiseDTO>, MapperHelp<Praise, PraiseDTO>>();
+
+
+
+            services.AddScoped<IRepository<Collection>, Repository<Collection>>();
+            services.AddScoped<IApiService<Collection, CollectionDTO>, ApiService<Collection, CollectionDTO>>();
+            services.AddScoped<IMapperHelp<Collection, CollectionDTO>, MapperHelp<Collection, CollectionDTO>>();
         }
     }
 }
