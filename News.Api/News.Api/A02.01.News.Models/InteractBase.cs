@@ -6,7 +6,7 @@ namespace News.Api.A02._01.News.Models
     //点赞
     public class InteractBase : Data
     {
-        public AppUser? User { get; set; }
+        public AppUser? AppUser { get; set; }
         public Newsa? Newsa { get; set; }
     }
 }

@@ -93,5 +93,10 @@ namespace News.Api.A03._02.Dto.Services
         {
             return await _repository.HasAsync(id);
         }
+
+
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)=>await _repository.CountAsync(predicate);
+        public async Task<int> CountAsync() =>await _repository.CountAsync();
     }
+
 }

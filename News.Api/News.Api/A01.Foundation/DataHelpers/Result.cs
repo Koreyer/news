@@ -6,7 +6,7 @@ namespace News.Api.A01.Foundation.DataHelpers
     {
         public ResultEnum ResultEnum { get; set; }
         public string? Message { get; set; } = "操作失败";
-        public int Status { get; set; }
+        public int Status { get; set; } = 202;
         public object? Data { get; set; }
     }
 }

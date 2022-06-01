@@ -75,5 +75,7 @@ namespace News.Api.A03._02.Dto.Services
         /// <param name="id"></param>
         /// <returns></returns>
         Task<bool> HasAsync(Guid id);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<int> CountAsync();
     }
 }
