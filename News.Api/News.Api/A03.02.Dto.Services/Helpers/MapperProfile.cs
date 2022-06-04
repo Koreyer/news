@@ -31,7 +31,10 @@ namespace News.Api.A03._02.Dto.Services.Helpers
 
             CreateMap<Collection, CollectionDTO>();
             CreateMap<CollectionDTO, Collection>();
-            
+
+            CreateMap<Comment, CommentDTO>();
+            CreateMap<CommentDTO, Comment>();
+
 
         }
 
