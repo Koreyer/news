@@ -186,8 +186,8 @@ namespace News.Api.A02._03.News.Repositories
         /// 根据查询条件，获取仓储中满足条件，并且按照给定批次（页码）、批量（每页条数）返回的领域对象集合
         /// </summary>
         /// <param name="predicate">查询条件表达式</param>
-        /// <param name="pageIndex">页码</param>
-        /// <param name="pageSize">每页条目数量</param>
+        /// <param name="start">起始索引</param>
+        /// <param name="length">数量</param>
         /// <returns></returns>
         public async Task<ResultData<TEntity>> GetBySelectAsync(int start, int length, Expression<Func<TEntity, bool>> predicate)
         {
