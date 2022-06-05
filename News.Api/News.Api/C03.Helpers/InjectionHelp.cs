@@ -42,6 +42,18 @@ namespace News.Api.C03.Helpers
             services.AddScoped<IRepository<Collection>, Repository<Collection>>();
             services.AddScoped<IApiService<Collection, CollectionDTO>, ApiService<Collection, CollectionDTO>>();
             services.AddScoped<IMapperHelp<Collection, CollectionDTO>, MapperHelp<Collection, CollectionDTO>>();
+
+
+            services.AddScoped<IRepository<Comment>, Repository<Comment>>();
+            services.AddScoped<IApiService<Comment, CommentDTO>, ApiService<Comment, CommentDTO>>();
+            services.AddScoped<IMapperHelp<Comment, CommentDTO>, MapperHelp<Comment, CommentDTO>>();
+
+
+            services.AddScoped<IRepository<CommentHistory>, Repository<CommentHistory>>();
+            services.AddScoped<IApiService<CommentHistory, CommentHistoryDTO>, ApiService<CommentHistory, CommentHistoryDTO>>();
+            services.AddScoped<IMapperHelp<CommentHistory, CommentHistoryDTO>, MapperHelp<CommentHistory, CommentHistoryDTO>>();
+
+            //CommentHistory
         }
     }
 }

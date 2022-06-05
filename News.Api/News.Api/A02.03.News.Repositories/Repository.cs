@@ -218,6 +218,30 @@ namespace News.Api.A02._03.News.Repositories
             }
             
         }
+        public async Task<ResultData<Other>> GetAllOther<Other>(Expression<Func<Other, bool>> predicate) where Other : class, IData, new()
+        {
+
+            IQueryable<Other> dbSet = _context!.Set<Other>();
+            var includePropertyExpressionCollection = ModelRelation.GetIncludeExpression<Other>();
+            if (includePropertyExpressionCollection != null)
+            {
+                foreach (var includePropertyExpression in includePropertyExpressionCollection)
+                {
+                    dbSet = dbSet.Include(includePropertyExpression);
+                }
+            }
+            var result = new ResultData<Other>();
+            if (predicate != null)
+            {
+                 result = new ResultData<Other>() { Datas = await dbSet!.Where(predicate).ToListAsync(), TotalCount = await dbSet!.CountAsync() };
+            }
+            else
+            {
+                 result = new ResultData<Other>() { Datas = await dbSet!.ToListAsync(), TotalCount = await dbSet!.CountAsync() };
+            }
+           
+            return result;
+        }
 
         public async Task<bool> HasAsync(Guid id) => await _context.Set<TEntity>()!.AnyAsync(x => x.Id == id);
 

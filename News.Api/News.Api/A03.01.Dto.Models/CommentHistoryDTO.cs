@@ -2,15 +2,14 @@
 
 namespace News.Api.A03._01.Dto.Models
 {
-    public class CommentDTO:Data
+    public class CommentHistoryDTO:Data
     {
+
         public string? AppUserId { get; set; }
         public string? AppUserName { get; set; }
-        public string? NewsaId { get; set; }
-        public string? NewsaName { get; set; }
+        public string? CommentId { get; set; }
+        public string? CommentName { get; set; }
         public DateTime Time { get; set; } = DateTime.Now;
-        //评论内容
         public string? Context { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

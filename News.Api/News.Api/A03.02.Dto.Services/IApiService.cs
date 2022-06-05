@@ -50,6 +50,7 @@ namespace News.Api.A03._02.Dto.Services
         /// <returns></returns>
         Task<TApiEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
         Task<TApiOther> GetOtherAsync<Other,TApiOther>(Guid id) where Other : class, IData, new() where TApiOther:class,IData,new() ;
+        Task<ResultData<TApiOther>> GetAllOtherAsync<Other, TApiOther>(Expression<Func<Other, bool>> predicate) where Other : class, IData, new() where TApiOther : class, IData, new();
         /// <summary>
         /// 获取一组数据
         /// </summary>

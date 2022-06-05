@@ -36,6 +36,8 @@ namespace News.Api.A03._02.Dto.Services.Helpers
             CreateMap<CommentDTO, Comment>();
 
 
+            CreateMap<CommentHistory, CommentHistoryDTO>();
+            CreateMap<CommentHistoryDTO, CommentHistory>();
         }
 
     }

@@ -68,6 +68,7 @@ namespace News.Api.A02._03.News.Repositories
         /// <param name="predicate">查询条件表达式</param>
         /// <returns></returns>
         Task<ResultData<TEntity>> GetBySelectAsync(int start,int length,Expression<Func<TEntity, bool>> predicate);
+        Task<ResultData<Other>>  GetAllOther<Other>(Expression<Func<Other, bool>> predicate) where Other : class, IData, new();
         #endregion
         #region 4. 入库的方法
         /// <summary>

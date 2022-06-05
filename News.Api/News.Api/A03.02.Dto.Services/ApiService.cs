@@ -75,6 +75,16 @@ namespace News.Api.A03._02.Dto.Services
                 TotalCount = ddos.TotalCount
             };
         }
+        public async Task<ResultData<TApiOther>> GetAllOtherAsync<Other, TApiOther>(Expression<Func<Other, bool>> predicate) where Other : class, IData, new() where TApiOther : class, IData, new()
+        {
+            var ddos = await _repository.GetAllOther<Other>(predicate);
+            var dtos = _mapper.Mapper.Map<List<TApiOther>>(ddos.Datas);
+            return new ResultData<TApiOther>()
+            {
+                Datas = dtos,
+                TotalCount = ddos.TotalCount
+            };
+        }
 
         public async Task<Result> UpdateAsync(TApiEntity request, params Expression<Func<TEntity, object>>[] expressions)
         {
