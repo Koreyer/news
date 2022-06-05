@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<u-tabbar :value="this.$store.state.tabbarIndex" @change="ChangBar" :fixed="false" :placeholder="false"
-			:safeAreaInsetBottom="false" style="position: fixed;bottom: 10rpx; width: 100%;">
+			:safeAreaInsetBottom="true" style=" height: 80rpx; width: 100%;">
 
 			<u-tabbar-item v-for="(item,index) in list" :text="item.text" :icon="item.icon" @click="click1">
 			</u-tabbar-item>

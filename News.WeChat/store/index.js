@@ -17,7 +17,9 @@ const store = new Vuex.Store({
 //获取屏幕高度
  uni.getSystemInfo({
 		success: (res) => {
-			store.screenHeight = res.screenHeight+"px"
+			var rpx=(res.screenHeight * (750 / res.windowWidth))
+			store.screenHeight = rpx - 160 +"rpx"
+			console.log(rpx);
 		}
 	})
 

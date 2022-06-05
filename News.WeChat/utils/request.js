@@ -6,10 +6,10 @@ const baseURL = 'https://tcnet.club:3000';
 //调试地址
 // const baseURL = 'https://localhost:3000';
 
-function get(url,callback) {
+function get(url,data,callback) {
 	uni.request({
 		url: baseURL + url, 
-		data: {},
+		data: data,
 		method:"GET",
 		complete: (res)=> {
 			callback(res)

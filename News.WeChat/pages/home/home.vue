@@ -1,6 +1,6 @@
 <template>
-	<view class="page" :style="{'height':this.$store.screenHeight}">
-		<view class="body">
+	<view class="page" >
+		<view class="body":style="{'height':this.$store.screenHeight}">
 			<u-upload
 					:fileList="file"
 					@afterRead="afterRead"
