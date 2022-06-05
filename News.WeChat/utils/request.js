@@ -2,9 +2,13 @@ import store from "../store/index.js";
 
 
 //服务器地址
-// const baseURL = 'https://tcnet.club:3000';
+const baseURL = 'https://tcnet.club:3000';
 //调试地址
-const baseURL = 'https://localhost:3000';
+// const baseURL = 'https://localhost:3000';
+
+const FileById =  baseURL+'/Api/Files/GetFileById?id='
+
+
 
 function get(url,data,callback) {
 	uni.request({
@@ -39,5 +43,5 @@ function del(url,callback) {
 } 
 
 export default{
-	get,post,del
+	get,post,del,baseURL,FileById
 }
