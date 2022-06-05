@@ -43,7 +43,7 @@ namespace News.Api.B01.BaseController
         /// </summary>
         /// <param name="selectParameter"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public virtual async Task<ResultData<TApiEntity>> GetBySelectAsync([FromBody] SelectParameter selectParameter)
         {

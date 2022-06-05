@@ -57,7 +57,19 @@ namespace News.Api.B02.Controllers
             news.AccessCount+=1;
             return await ApiService.UpdateAsync(news);
         }
-        
+
+        /// <summary>
+        /// 软删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override async Task<Result> DeleteByIdAsync(string id)
+        {
+            var bo = await ApiService.GetAsync(Guid.Parse(id));
+            bo.IsDelete = true;
+            return await ApiService.UpdateAsync(bo, x => x.AppUser, x => x.Chanel, x => x.Files);
+        }
+
 
 
     }

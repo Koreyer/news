@@ -25,5 +25,6 @@ namespace News.Api.A03._01.Dto.Models
         /// </summary>
         public int AccessCount { get; set; }
 
+        public bool IsDelete { get; set; }
     }
 }

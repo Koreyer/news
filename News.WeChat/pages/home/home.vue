@@ -32,13 +32,24 @@
 		data() {
 			return {
 				title: "",
-				file:[]
+				file:[],
+				newsList:[],
+				select:{
+					start:0,
+					length:10,
+					selectValue:""
+				}
 			}
 		},
 		onLoad() {
-			
+			this.getData()
 		},
 		methods: {
+			getData(){
+				api.GetNews(this.select,res=>{
+					console.log(res);
+				})
+			},
 			afterRead(file, lists, name){
 				console.log(this.$store.state);
 				console.log(file);
