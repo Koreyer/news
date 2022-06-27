@@ -2,7 +2,7 @@ import store from "../store/index.js";
 
 
 //服务器地址
-const baseURL = 'https://tcnet.club:3000';
+const baseURL = 'https://175.178.255.147:3000';
 //调试地址
 // const baseURL = 'https://localhost:3000';
 
